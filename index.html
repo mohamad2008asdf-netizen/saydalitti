@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#073F46">
+  <meta name="description" content="صيدليتي - دليل الصيدليات المناوبة في جسر الشغور">
+  <title>صيدليتي | جسر الشغور</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Leaflet map library -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="top-header">
+      <a class="brand" href="#" onclick="showPage('homePage'); return false;" aria-label="العودة للرئيسية">
+        <span class="brand-mark">✚</span>
+        <span class="brand-copy"><strong>صيدليتي</strong><small>دليلك الصحي في جسر الشغور</small></span>
+      </a>
+      <div class="city-chip"><i></i><span>جسر الشغور</span></div>
+    </header>
+
+    <main>
+      <section class="page active" id="homePage">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="overline"><b></b> خدمتك الصحية المحلية</span>
+            <h1>الصيدلية المناوبة<br><em>بخطوة واحدة</em></h1>
+            <p>كل ما تحتاج معرفته عن مناوبات الصيدليات في جسر الشغور، بوضوح وسهولة.</p>
+            <button class="hero-button" onclick="showPage('dutyPage'); renderDuty();">
+              <span>اعرف صيدلية اليوم</span><b>←</b>
+            </button>
+          </div>
+          <div class="hero-sign-wrap" aria-label="قارمة صيدليتي">
+            <div class="hero-orbit orbit-one"></div>
+            <div class="hero-orbit orbit-two"></div>
+            <div class="hero-cross">✚</div>
+            <div class="hero-sign">
+              <span class="sign-cross">✚</span>
+              <strong>صيدليتي</strong>
+              <small>PHARMACY · JISR AL-SHUGHUR</small>
+            </div>
+            <div class="hero-glass"><span></span><span></span><span></span></div>
+          </div>
+          <div class="hero-bottom"><span>رعاية أقرب إليك</span><span>● خدمة محلية</span></div>
+        </div>
+
+        <div class="section-intro">
+          <div><span class="eyebrow">خدمات صيدليتي</span>
+            <h2>كيف فينا نساعدك؟</h2>
+          </div>
+          <span class="intro-mark">✚</span>
+        </div>
+
+        <button class="feature-card" onclick="showPage('dutyPage'); renderDuty();">
+          <span class="feature-icon">✚</span>
+          <span class="feature-content"><small>الخدمة الرئيسية</small><strong>الصيدلية المناوبة الآن</strong><em>اعرف
+              أسماء الصيدليات وعناوينها</em></span>
+          <span class="feature-arrow">←</span>
+        </button>
+
+        <div class="quick-grid">
+          <button class="quick-card" onclick="showPage('schedulePage'); renderSchedule();">
+            <span class="quick-icon blue-icon">▦</span><strong>جدول المناوبات</strong><small>مواعيد الشهر كاملة</small>
+          </button>
+          <button class="quick-card" onclick="showPage('directoryPage'); renderDirectory();">
+            <span class="quick-icon green-icon">⌕</span><strong>دليل الصيدليات</strong><small>ابحث عن صيدلية</small>
+          </button>
+        </div>
+
+        <button class="map-feature" onclick="showPage('mapPage')">
+          <span class="map-feature-icon">⌖</span>
+          <span><strong>خريطة جسر الشغور</strong><small>استعرض المدينة وافتح موقع الصيدلية على الخرائط</small></span>
+          <b>←</b>
+        </button>
+
+        <div class="hours-overview">
+          <div class="hours-overview-head"><span>◷</span>
+            <div><strong>أوقات عمل الصيدليات</strong><small>معلومات سريعة عن نظام الدوام</small></div>
+          </div>
+          <div class="hours-row day-hours"><span class="hours-symbol">☀</span>
+            <div><strong>خلال النهار</strong><small>جميع الصيدليات مفتوحة من السبت إلى الخميس</small></div><b>دوام
+              عام</b>
+          </div>
+          <div class="hours-row night-hours"><span class="hours-symbol">☾</span>
+            <div><strong>المناوبة المسائية</strong><small>من السبت إلى الخميس · 8 مساءً حتى 12 ليلاً</small></div><b>حسب
+              الجدول</b>
+          </div>
+          <div class="hours-row overnight-hours"><span class="hours-symbol">🌙</span>
+            <div><strong>المناوبة بعد منتصف الليل</strong><small>من 12 ليلاً حتى 8 صباحاً · البيانات قيد الإضافة</small>
+            </div><b>قريباً</b>
+          </div>
+          <div class="hours-row friday-hours"><span class="hours-symbol">▦</span>
+            <div><strong>يوم الجمعة</strong><small>8 صباحاً–4:30 عصراً، ثم 4:30 عصراً–12 ليلاً</small></div>
+            <b>فترتان</b>
+          </div>
+        </div>
+        <div class="trust-strip"><span>✦ معلومات واضحة</span><span>✦ تغطية محلية</span><span>✦ استخدام سهل</span></div>
+      </section>
+
+      <section class="page" id="dutyPage">
+        <div class="page-heading"><span class="eyebrow">حالة الدوام اليوم</span>
+          <h2>الصيدليات العاملة</h2>
+          <p id="dutyDate">جاري تحميل التاريخ...</p>
+        </div>
+        <div class="duty-time-card"><span class="time-icon">◷</span>
+          <div><strong>حالة المناوبة الآن</strong><span>يتم تحديد الفترة تلقائياً حسب توقيت سوريا</span></div><span
+            class="time-badge">Asia/Damascus</span>
+        </div>
+        <div id="dutyStatus" class="duty-status"></div>
+        <div id="dutyList" class="pharmacy-list"></div>
+      </section>
+
+      <section class="page" id="schedulePage">
+        <div class="page-heading"><span class="eyebrow">جدول الشهر</span>
+          <h2>مواعيد المناوبات</h2>
+          <p>المناوبات الليلية من السبت إلى الخميس، وفترتا مناوبة يوم الجمعة.</p>
+        </div>
+        <div class="schedule-month"><span>▦</span><strong>تشرين الثاني 2026</strong></div>
+        <div id="scheduleList" class="schedule-list"></div>
+      </section>
+
+      <section class="page" id="directoryPage">
+        <div class="page-heading"><span class="eyebrow">دليل المدينة</span>
+          <h2>دليل الصيدليات</h2>
+          <p>ابحث عن الصيدلية بالاسم أو العنوان.</p>
+        </div>
+        <label class="search-box"><span>⌕</span><input id="searchInput" type="search"
+            placeholder="ابحث عن اسم الصيدلية أو عنوانها..." oninput="renderDirectory(this.value)"></label>
+        <div id="directoryList" class="directory-list"></div>
+      </section>
+
+      <section class="page" id="mapPage">
+        <div class="page-heading"><span class="eyebrow">دليل المواقع</span>
+          <h2>خريطة جسر الشغور</h2>
+          <p>الخريطة تعرض مركز المدينة بشكل تقريبي. مواقع الصيدليات الدقيقة تضاف بعد إدخال إحداثياتها المعتمدة.</p>
+        </div>
+        <div class="map-panel">
+          <div class="map-panel-head"><span class="map-live-dot"></span>
+            <div><strong>خريطة المدينة</strong><small>OpenStreetMap · عرض تفاعلي</small></div>
+          </div>
+          <div id="pharmacyMap" role="application" aria-label="خريطة جسر الشغور"></div>
+          <div id="mapStatus" class="map-status">جاري تحميل الخريطة...</div>
+          <a class="map-external-link" href="https://www.google.com/maps/search/?api=1&query=Jisr+al+Shughur"
+            target="_blank" rel="noopener noreferrer">فتح جسر الشغور على خرائط Google <span>↗</span></a>
+        </div>
+        <div class="about-card map-note"><span class="eyebrow">ملاحظة مهمة</span>
+          <p>العناوين النصية الموجودة في دليل الصيدليات ليست إحداثيات GPS. لذلك لن نضع علامات وهمية لمواقع الصيدليات.
+            عند تزويدنا بإحداثيات كل صيدلية، ستظهر علامتها الصحيحة على الخريطة.</p>
+        </div>
+      </section>
+
+      <section class="page" id="aboutPage">
+        <div class="about-hero"><span>✚</span>
+          <h2>صيدليتي</h2>
+          <p>أقرب وأسهل لأهالي جسر الشغور</p>
+        </div>
+        <div class="about-card"><span class="eyebrow">عن المشروع</span>
+          <h3>خدمة محلية لأهل المدينة</h3>
+          <p>يساعد تطبيق صيدليتي أهالي جسر الشغور على معرفة الصيدليات المناوبة وعناوينها، من خلال عرض جدول المناوبات
+            بطريقة واضحة وسهلة الاستخدام.</p>
+        </div>
+        <div class="about-card"><span class="eyebrow">أوقات العمل</span>
+          <h3>الدوام النهاري والمناوبات</h3>
+          <p>من السبت إلى الخميس تكون جميع الصيدليات مفتوحة خلال النهار، وتكون المناوبة المسائية من 8 مساءً حتى 12
+            ليلاً. وتوجد فترة مناوبة بعد منتصف الليل من 12 ليلاً حتى 8 صباحاً، وستضاف بياناتها عند استلام الجدول. أما
+            يوم الجمعة فتكون هناك مناوبة صباحية من 8 صباحاً حتى 4:30 عصراً، ومناوبة مسائية من 4:30 عصراً حتى 12 ليلاً.
+          </p>
+        </div>
+        <p class="copyright">صيدليتي © 2026 · جسر الشغور</p>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="التنقل الرئيسي">
+      <button class="nav-item active" data-page="homePage"
+        onclick="showPage('homePage')"><span>⌂</span><small>الرئيسية</small></button>
+      <button class="nav-item" data-page="dutyPage"
+        onclick="showPage('dutyPage'); renderDuty();"><span>✚</span><small>المناوبة</small></button>
+      <button class="nav-item" data-page="schedulePage"
+        onclick="showPage('schedulePage'); renderSchedule();"><span>▦</span><small>الجدول</small></button>
+      <button class="nav-item" data-page="directoryPage"
+        onclick="showPage('directoryPage'); renderDirectory();"><span>☷</span><small>الصيدليات</small></button>
+      <button class="nav-item" data-page="mapPage"
+        onclick="showPage('mapPage')"><span>⌖</span><small>الخريطة</small></button>
+      <button class="nav-item" data-page="aboutPage"
+        onclick="showPage('aboutPage')"><span>ⓘ</span><small>حول</small></button>
+    </nav>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
